@@ -18,7 +18,7 @@
                     </h6>
                     <h6 class="card-subtitle mb-3 text-primary">Tecnology:
                         @forelse ($project->technologies as $technology)
-                            {{ $technology->name }}
+                            <li>{{ $technology->name }}</li>
                         @empty
                             <span>-</span>
                         @endforelse

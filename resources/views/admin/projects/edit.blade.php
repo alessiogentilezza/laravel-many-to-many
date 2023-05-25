@@ -56,19 +56,25 @@
             @enderror
         </div>
 
-
-
-
-
-
-
-
-
-
         <div class="mb-3">
             <label for="content" class="form-label">Testo dell'articolo</label>
             <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content">{{ old('content', $project->content) }}</textarea>
             @error('content')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            @foreach ($technologies as $technology)
+                <input id="technology_{{ $technology->id }}" @if (in_array($technology->id, old('technologys', []))) checked @endif
+                    type="checkbox" name="technologies[]" value="{{ $technology->id }}">
+                <label for="technology_{{ $technology->id }}" class="form-label">{{ $technology->name }}</label>
+                <br>
+            @endforeach
+
+            @error('technologies')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>

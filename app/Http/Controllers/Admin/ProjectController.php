@@ -88,8 +88,9 @@ class ProjectController extends Controller
 
         $types = Type::all();
         // dd($types);
+        $technologies = Technology::all();
 
-        return view('admin.projects.edit', compact('project', 'types'));
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -105,6 +106,8 @@ class ProjectController extends Controller
         $validated_data = $request->validated();
 
         $validated_data['slug'] = Str::slug($request->title, '-');
+
+        $project->technologies()->sync($request->technologies);
 
         $project->update($validated_data);
 
