@@ -11,17 +11,12 @@
                 card's content.</p>
             <h6 class="card-subtitle mb-3 text-success">Tipo di linguaggio:
                 {{ $project->type ? $project->type->name : 'Nessun linguaggio scelto' }}</h6>
-
             <h6 class="card-subtitle mb-3 text-primary">Tecnology:
                 @forelse ($project->technologies as $technology)
                     {{ $technology->name }}
                 @empty
                     <span>Non hai selezionato nessua tecnologia</span>
                 @endforelse
-
-                {{-- @foreach ($project->technologies as $technology)
-                        {{ $technology->name ? $project->technology->name : 'Non hai selezionato nessua tecnologia'   }}
-                    @endforeach --}}
             </h6>
             <a href="{{ $project->link }}" class="btn btn-success">Vai</a>
             <a class="btn btn-primary" href="{{ route('admin.projects.index') }}">Lista preogetti</a>
