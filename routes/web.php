@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\TechnologyController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -31,8 +32,11 @@ Route::middleware(['auth', 'verified'])
         Route::resource('projects', ProjectController::class)
             ->parameters(['projects' => 'project:slug']);
 
-        Route::resource('types', TypeController::class)
+            Route::resource('types', TypeController::class)
             ->parameters(['types' => 'type:slug'])->only(['index']);
+
+            Route::resource('technologies', TechnologyController::class)
+            ->parameters(['technologies' => 'technology:slug'])->only(['index']);
     });
 
 Route::middleware('auth')->group(function () {
