@@ -12,11 +12,22 @@
                     <h5 class="card-title">{{ $project->title }}</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                         card's content.</p>
-                        <h6 class="card-subtitle mb-3 text-success">Tipo di linguaggio:
-                            {{ $project->type ? $project->type->name : '-' }}
-                            {{-- {{ $project->type?->name}} --}}
-                        </h6>
-                        <a class="btn btn-primary" href="{{ route('admin.projects.show', $project->slug) }}">Vedi</a>
+                    <h6 class="card-subtitle mb-3 text-success">Tipo di linguaggio:
+                        {{ $project->type ? $project->type->name : '-' }}
+                        {{-- {{ $project->type?->name}} --}}
+                    </h6>
+                    <h6 class="card-subtitle mb-3 text-primary">Tecnology:
+                        @forelse ($project->technologies as $technology)
+                            {{ $technology->name }}
+                        @empty
+                            <span>-</span>
+                        @endforelse
+
+                        {{-- @foreach ($project->technologies as $technology)
+                            {{ $technology->name ? $project->technology->name : '-'   }}
+                        @endforeach --}}
+                    </h6>
+                    <a class="btn btn-primary" href="{{ route('admin.projects.show', $project->slug) }}">Vedi</a>
                     <a class="btn btn-warning" href="{{ route('admin.projects.edit', $project->slug) }}">Modifica</a>
                     <a href="{{ $project->link }}" class="ms-3 btn btn-success">Vai</a>
 
