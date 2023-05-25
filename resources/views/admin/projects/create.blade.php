@@ -45,7 +45,7 @@
             <select class="form-select @error('type_id') is-invalid @enderror" name="type_id" id="type_id">
                 <option @selected(old('type_id') == '') value="">Nessuna tipo selezionato</option>
                 @foreach ($types as $type)
-                <option @selected(old('type_id') == $type->id) value="{{ $type->id }}">{{ $type->name }}</option>
+                    <option @selected(old('type_id') == $type->id) value="{{ $type->id }}">{{ $type->name }}</option>
                 @endforeach
             </select>
             @error('type_id')
@@ -59,6 +59,21 @@
             <label for="content" class="form-label">Testo dell'articolo</label>
             <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content">{{ old('content') }}</textarea>
             @error('content')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            @foreach ($technologies as $technology)
+                <input id="technology_{{ $technology->id }}" @if (in_array($technology->id, old('technologys', []))) checked @endif type="checkbox"
+                    name="technologies[]" value="{{ $technology->id }}">
+                <label for="technology_{{ $technology->id }}" class="form-label">{{ $technology->name }}</label>
+                <br>
+            @endforeach
+
+            @error('technologies')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>

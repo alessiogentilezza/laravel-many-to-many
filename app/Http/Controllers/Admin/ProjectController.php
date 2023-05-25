@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str; // <- da importare
@@ -35,8 +36,10 @@ class ProjectController extends Controller
     {
         $types = Type::all();
         // dd($types);
+        $technologies = Technology::all();
 
-        return view('admin.projects.create', compact('types'));
+
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -47,13 +50,19 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
+        // dd($request);
         $validated_data = $request->validated();
 
         $validated_data['slug'] = Str::slug($request->title, '-');
 
         $newProject = Project::create($validated_data);
 
-        return redirect()->route('admin.projects.show', ['project' => $newProject->slug])->with('status', 'Progetto creato con successo!');
+        if ($request->has('technologies')) {
+            $newProject->technologies()->attach($request->technologies);
+        }
+
+        return redirect()->route('admin.projects.show', ['project' => $newProject->slug])
+            ->with('status', 'Progetto creato con successo!');
     }
 
     /**
