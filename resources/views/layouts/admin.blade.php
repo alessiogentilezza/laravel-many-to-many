@@ -29,11 +29,10 @@
                         @include('partials.sidebar')
                     </div>
                     <div class="col-10">
-                        @if (session('status'))
-                            <div class="alert alert-success m-3" style="width: 18rem">
-                                {{ session('status') }}
-                            </div>
-                        @endif
+
+                        @include('partials.errors')
+                        @include('partials.messages')
+
                         @yield('content')
                     </div>
                 </div>

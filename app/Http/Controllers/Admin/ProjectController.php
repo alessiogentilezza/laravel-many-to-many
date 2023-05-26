@@ -53,6 +53,7 @@ class ProjectController extends Controller
     {
         // dd($request);
         $validated_data = $request->validated();
+        // dd($validated_data);
 
         $validated_data['slug'] = Str::slug($request->title, '-');
 
