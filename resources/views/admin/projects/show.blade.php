@@ -4,7 +4,8 @@
 
 @section('content')
     <div class="card m-3" style="width: 18rem;">
-        <img src="{{ $project->cover_image }}" class="card-img-top p-3" alt="...">
+        <img src="{{ asset('storage/' . $project->cover_image) }}" class="card-img-top p-3" alt="...">
+        {{-- <img src="{{ $project->cover_image }}" class="card-img-top p-3" alt="..."> --}}
         <div class="card-body">
             <h5 class="card-title">{{ $project->title }}</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the

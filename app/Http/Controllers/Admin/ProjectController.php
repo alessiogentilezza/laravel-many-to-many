@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str; // <- da importare
 
 
@@ -52,10 +53,16 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         // dd($request);
+
         $validated_data = $request->validated();
         // dd($validated_data);
 
         $validated_data['slug'] = Str::slug($request->title, '-');
+
+        if ($request->hasFile('cover_image')) {
+            $img_path = Storage::put('cover', $request->cover_image);
+            $validated_data['cover_image'] = $img_path;
+        }
 
         $newProject = Project::create($validated_data);
 
