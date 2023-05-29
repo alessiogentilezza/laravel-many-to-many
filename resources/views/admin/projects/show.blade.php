@@ -1,10 +1,12 @@
 @extends('layouts.admin')
 
+
 @section('page-title', $project->title)
 
 @section('content')
     <div class="card m-3" style="width: 18rem;">
-        <img src="{{ asset('storage/' . $project->cover_image) }}" class="card-img-top p-3" alt="...">
+
+        <img src="{{asset('storage/' . $project->cover_image)}}" class="card-img-top p-3" alt="...">
         {{-- <img src="{{ $project->cover_image }}" class="card-img-top p-3" alt="..."> --}}
         <div class="card-body">
             <h5 class="card-title">{{ $project->title }}</h5>

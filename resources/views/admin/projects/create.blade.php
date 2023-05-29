@@ -30,9 +30,9 @@
         </div>
 
         <div class="mb-3">
+
             <label for="cover_image" class="form-label">Seleziona immagine di copertina</label>
-            <input type="file" class="form-control @error('cover_image') is-invalid @enderror " id="cover_image"
-                name="cover_image" value="{{ old('cover_image') }}">
+            <input type="file" class="form-control @error('cover_image') is-invalid @enderror " id="cover_image" name="cover_image">
             @error('cover_image')
                 <div class="invalid-feedback">
                     {{ $message }}
